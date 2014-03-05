@@ -19,21 +19,7 @@
      <layout class="QVBoxLayout" name="ParametersLayout"/>
     </item>
     <item>
-     <layout class="QGridLayout" name="graphsLayout">
-      <item row="0" column="0">
-       <widget class="QPushButton" name="pushButton">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>PushButton</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <layout class="QGridLayout" name="graphsLayout"/>
     </item>
    </layout>
   </widget>

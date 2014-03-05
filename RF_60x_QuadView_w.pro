@@ -17,7 +17,9 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    DeviceDataWidget.ui \
+    PlotWidget.ui
 
 OTHER_FILES += \
     main.qml \

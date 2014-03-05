@@ -1,7 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-
+#include <PlotWidget.h>
+#include <DeviceDataWidget.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -24,6 +25,19 @@ MainWindow::MainWindow(QWidget *parent) :
 	_view->setResizeMode(QQuickView::SizeRootObjectToView);	
 	ui->ParametersLayout->addWidget(_container);
 
+	current_column	= 0;
+	current_row		= 0;
+
+	DeviceDataWidget* ddw = new DeviceDataWidget();
+	PlotWidget* pw = new PlotWidget();
+	ddw->SetPlotWidget(pw);
+	ui->graphsLayout->addWidget(ddw);
+
+	DeviceDataWidget* ddw1 = new DeviceDataWidget();
+	PlotWidget* pw1 = new PlotWidget();
+	ddw1->SetPlotWidget(pw1, true);
+	ui->graphsLayout->addWidget(ddw1);
+
 	/*QStringList list;
 	list.append("228");
 	list.append("1337");
@@ -36,4 +50,20 @@ MainWindow::~MainWindow()
 	RFDevice::Cleanup();
 	delete _container;
     delete ui;
+}
+
+void MainWindow::AddWidgetToGrid(QWidget* widget)
+{
+	const int maxRows = 2;
+	
+	if(current_row == maxRows - 1)
+	{
+		current_row = 0;
+		current_column++;
+	}
+	else
+	{
+		current_row++;
+	}
+
 }

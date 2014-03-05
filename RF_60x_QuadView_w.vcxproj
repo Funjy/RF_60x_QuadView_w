@@ -26,7 +26,7 @@
     <PrimaryOutput>RF_60x_QuadView_w</PrimaryOutput>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <PlatformToolSet>v110</PlatformToolSet>
+    <PlatformToolSet>v110_xp</PlatformToolSet>
     <OutputDirectory>debug\</OutputDirectory>
     <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
     <CharacterSet>NotSet</CharacterSet>
@@ -97,7 +97,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include;..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQuick;..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQml;..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtWidgets;..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtNetwork;..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtGui;..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtANGLE;..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtCore;debug;.;..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\mkspecs\win32-msvc2012;.\GeneratedFiles;C:\Users\KUSTOV.RIFTEK\Documents\QtProjects\RF_60x_QuadView_w\RF_60x_QuadView_w\RFDevice\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include;..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQuick;..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQml;..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtWidgets;..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtNetwork;..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtGui;..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtANGLE;..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtCore;debug;.;..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\mkspecs\win32-msvc2012;.\GeneratedFiles;C:\Users\KUSTOV.RIFTEK\Documents\QtProjects\RF_60x_QuadView_w\RF_60x_QuadView_w\RFDevice\include;$(QWT_ROOT)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-Zm200 -w34100 -w34189 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>debug\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -115,8 +115,8 @@
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>qtmaind.lib;$(QTDIR)\lib\Qt5Quickd.lib;$(QTDIR)\lib\Qt5Qmld.lib;$(QTDIR)\lib\Qt5Widgetsd.lib;$(QTDIR)\lib\Qt5Networkd.lib;$(QTDIR)\lib\Qt5Guid.lib;$(QTDIR)\lib\Qt5Cored.lib;libEGLd.lib;libGLESv2d.lib;gdi32.lib;user32.lib;RFDevice.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;C:\Users\KUSTOV.RIFTEK\Documents\QtProjects\RF_60x_QuadView_w\RF_60x_QuadView_w\RFDevice;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>qtmaind.lib;$(QTDIR)\lib\Qt5Quickd.lib;$(QTDIR)\lib\Qt5Qmld.lib;$(QTDIR)\lib\Qt5Widgetsd.lib;$(QTDIR)\lib\Qt5Networkd.lib;$(QTDIR)\lib\Qt5Guid.lib;$(QTDIR)\lib\Qt5Cored.lib;libEGLd.lib;libGLESv2d.lib;gdi32.lib;user32.lib;RFDevice.lib;qwtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;C:\Users\KUSTOV.RIFTEK\Documents\QtProjects\RF_60x_QuadView_w\RF_60x_QuadView_w\RFDevice;$(QWT_ROOT)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -137,26 +137,61 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ComDeviceWorker.cpp" />
+    <ClCompile Include="DeviceDataWidget.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_ComDeviceWorker.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_DeviceDataWidget.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_mainwindow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_PlotWidget.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_qaxiszoomsvc.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_qwheelzoomsvc.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_qwtchartzoom.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_ComDeviceWorker.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_DeviceDataWidget.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_mainwindow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_PlotWidget.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_qaxiszoomsvc.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_qwheelzoomsvc.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_qwtchartzoom.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainwindow.cpp" />
+    <ClCompile Include="PlotWidget.cpp" />
+    <ClCompile Include="qaxiszoomsvc.cpp" />
+    <ClCompile Include="qwheelzoomsvc.cpp" />
+    <ClCompile Include="qwtchartzoom.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_QUICK_LIB -DQT_QML_LIB -DQT_WIDGETS_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -DNDEBUG  "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQuick" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQml" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtWidgets" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtNetwork" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtGui" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtANGLE" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtCore" "-I.\release" "-I." "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\mkspecs\win32-msvc2012" "-I.\GeneratedFiles"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing mainwindow.h...</Message>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQT_QUICK_LIB -DQT_QML_LIB -DQT_WIDGETS_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE  "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQuick" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQml" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtWidgets" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtNetwork" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtGui" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtANGLE" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtCore" "-I.\debug" "-I." "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\mkspecs\win32-msvc2012" "-I.\GeneratedFiles" "-IC:\Users\KUSTOV.RIFTEK\Documents\QtProjects\RF_60x_QuadView_w\RF_60x_QuadView_w\RFDevice\include"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQT_QUICK_LIB -DQT_QML_LIB -DQT_WIDGETS_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE  "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQuick" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQml" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtWidgets" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtNetwork" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtGui" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtANGLE" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtCore" "-I.\debug" "-I." "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\mkspecs\win32-msvc2012" "-I.\GeneratedFiles" "-IC:\Users\KUSTOV.RIFTEK\Documents\QtProjects\RF_60x_QuadView_w\RF_60x_QuadView_w\RFDevice\include" "-I$(QWT_ROOT)\include"</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing mainwindow.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
@@ -178,21 +213,121 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <CustomBuild Include="DeviceDataWidget.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing DeviceDataWidget.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQT_QUICK_LIB -DQT_QML_LIB -DQT_WIDGETS_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQuick" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQml" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtWidgets" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtNetwork" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtGui" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtANGLE" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtCore" "-I.\debug" "-I." "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\mkspecs\win32-msvc2012" "-I.\GeneratedFiles" "-IC:\Users\KUSTOV.RIFTEK\Documents\QtProjects\RF_60x_QuadView_w\RF_60x_QuadView_w\RFDevice\include" "-I$(QWT_ROOT)\include"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing DeviceDataWidget.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_QUICK_LIB -DQT_QML_LIB -DQT_WIDGETS_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -DNDEBUG "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQuick" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQml" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtWidgets" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtNetwork" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtGui" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtANGLE" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtCore" "-I.\release" "-I." "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\mkspecs\win32-msvc2012" "-I.\GeneratedFiles"</Command>
+    </CustomBuild>
+    <ClInclude Include="GeneratedFiles\ui_DeviceDataWidget.h" />
+    <ClInclude Include="GeneratedFiles\ui_mainwindow.h" />
+    <ClInclude Include="RFDevice\include\RF060Device.h" />
+    <ClInclude Include="RFDevice\include\RF085Device.h" />
+    <ClInclude Include="RFDevice\include\RF25xDevice.h" />
+    <ClInclude Include="RFDevice\include\RF603BDevice.h" />
+    <ClInclude Include="RFDevice\include\RF603Device.h" />
+    <ClInclude Include="RFDevice\include\RF603HSDevice.h" />
+    <ClInclude Include="RFDevice\include\RF605Device.h" />
+    <ClInclude Include="RFDevice\include\RF60xDevice.h" />
+    <ClInclude Include="RFDevice\include\RF620Device.h" />
+    <ClInclude Include="RFDevice\include\RF625Device.h" />
+    <ClInclude Include="RFDevice\include\RF651Device.h" />
+    <ClInclude Include="RFDevice\include\RF656Device.h" />
+    <ClInclude Include="RFDevice\include\RF65xDevice.h" />
+    <ClInclude Include="RFDevice\include\RF65xNDevice.h" />
+    <ClInclude Include="RFDevice\include\RF700Device.h" />
+    <ClInclude Include="RFDevice\include\RFComDetector.h" />
+    <ClInclude Include="RFDevice\include\RFComDevice.h" />
+    <ClInclude Include="RFDevice\include\RFDevice.h" />
+    <ClInclude Include="RFDevice\include\RFDeviceDefs.h" />
+    <ClInclude Include="RFDevice\include\RFLanDetector.h" />
+    <ClInclude Include="RFDevice\include\RFLanDevice.h" />
+    <ClInclude Include="RFDevice\include\RFQDPMotorDevice.h" />
+    <ClInclude Include="RFDevice\include\RFString.h" />
     <CustomBuild Include="ComDeviceWorker.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing ComDeviceWorker.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQT_QUICK_LIB -DQT_QML_LIB -DQT_WIDGETS_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE  "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQuick" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQml" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtWidgets" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtNetwork" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtGui" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtANGLE" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtCore" "-I.\debug" "-I." "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\mkspecs\win32-msvc2012" "-I.\GeneratedFiles" "-IC:\Users\KUSTOV.RIFTEK\Documents\QtProjects\RF_60x_QuadView_w\RF_60x_QuadView_w\RFDevice\include"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQT_QUICK_LIB -DQT_QML_LIB -DQT_WIDGETS_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE  "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQuick" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQml" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtWidgets" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtNetwork" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtGui" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtANGLE" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtCore" "-I.\debug" "-I." "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\mkspecs\win32-msvc2012" "-I.\GeneratedFiles" "-IC:\Users\KUSTOV.RIFTEK\Documents\QtProjects\RF_60x_QuadView_w\RF_60x_QuadView_w\RFDevice\include" "-I$(QWT_ROOT)\include"</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing ComDeviceWorker.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_QUICK_LIB -DQT_QML_LIB -DQT_WIDGETS_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -DNDEBUG "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQuick" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQml" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtWidgets" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtNetwork" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtGui" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtANGLE" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtCore" "-I.\release" "-I." "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\mkspecs\win32-msvc2012" "-I.\GeneratedFiles"</Command>
     </CustomBuild>
-    <ClInclude Include="GeneratedFiles\ui_mainwindow.h" />
+    <CustomBuild Include="PlotWidget.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing PlotWidget.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQT_QUICK_LIB -DQT_QML_LIB -DQT_WIDGETS_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQuick" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQml" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtWidgets" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtNetwork" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtGui" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtANGLE" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtCore" "-I.\debug" "-I." "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\mkspecs\win32-msvc2012" "-I.\GeneratedFiles" "-IC:\Users\KUSTOV.RIFTEK\Documents\QtProjects\RF_60x_QuadView_w\RF_60x_QuadView_w\RFDevice\include" "-I$(QWT_ROOT)\include"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing PlotWidget.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_QUICK_LIB -DQT_QML_LIB -DQT_WIDGETS_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -DNDEBUG "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQuick" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQml" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtWidgets" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtNetwork" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtGui" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtANGLE" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtCore" "-I.\release" "-I." "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\mkspecs\win32-msvc2012" "-I.\GeneratedFiles"</Command>
+    </CustomBuild>
+    <CustomBuild Include="qaxiszoomsvc.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing qaxiszoomsvc.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQT_QUICK_LIB -DQT_QML_LIB -DQT_WIDGETS_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQuick" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQml" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtWidgets" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtNetwork" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtGui" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtANGLE" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtCore" "-I.\debug" "-I." "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\mkspecs\win32-msvc2012" "-I.\GeneratedFiles" "-IC:\Users\KUSTOV.RIFTEK\Documents\QtProjects\RF_60x_QuadView_w\RF_60x_QuadView_w\RFDevice\include" "-I$(QWT_ROOT)\include"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing qaxiszoomsvc.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_QUICK_LIB -DQT_QML_LIB -DQT_WIDGETS_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -DNDEBUG "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQuick" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQml" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtWidgets" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtNetwork" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtGui" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtANGLE" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtCore" "-I.\release" "-I." "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\mkspecs\win32-msvc2012" "-I.\GeneratedFiles"</Command>
+    </CustomBuild>
+    <CustomBuild Include="qwheelzoomsvc.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing qwheelzoomsvc.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQT_QUICK_LIB -DQT_QML_LIB -DQT_WIDGETS_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQuick" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQml" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtWidgets" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtNetwork" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtGui" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtANGLE" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtCore" "-I.\debug" "-I." "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\mkspecs\win32-msvc2012" "-I.\GeneratedFiles" "-IC:\Users\KUSTOV.RIFTEK\Documents\QtProjects\RF_60x_QuadView_w\RF_60x_QuadView_w\RFDevice\include" "-I$(QWT_ROOT)\include"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing qwheelzoomsvc.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_QUICK_LIB -DQT_QML_LIB -DQT_WIDGETS_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -DNDEBUG "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQuick" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQml" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtWidgets" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtNetwork" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtGui" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtANGLE" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtCore" "-I.\release" "-I." "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\mkspecs\win32-msvc2012" "-I.\GeneratedFiles"</Command>
+    </CustomBuild>
+    <CustomBuild Include="qwtchartzoom.h">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing qwtchartzoom.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQT_QUICK_LIB -DQT_QML_LIB -DQT_WIDGETS_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQuick" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQml" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtWidgets" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtNetwork" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtGui" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtANGLE" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtCore" "-I.\debug" "-I." "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\mkspecs\win32-msvc2012" "-I.\GeneratedFiles" "-IC:\Users\KUSTOV.RIFTEK\Documents\QtProjects\RF_60x_QuadView_w\RF_60x_QuadView_w\RFDevice\include" "-I$(QWT_ROOT)\include"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Moc%27ing qwtchartzoom.h...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -D_WINDOWS -DUNICODE -DWIN32 -DQT_NO_DEBUG -DQT_QUICK_LIB -DQT_QML_LIB -DQT_WIDGETS_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB -DQT_OPENGL_ES_2 -DQT_OPENGL_ES_2_ANGLE -DNDEBUG "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQuick" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtQml" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtWidgets" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtNetwork" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtGui" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtANGLE" "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\include\QtCore" "-I.\release" "-I." "-I.\..\..\..\..\..\..\Qt\Qt5.2.1_msvc2012_x86\5.2.1\msvc2012\mkspecs\win32-msvc2012" "-I.\GeneratedFiles"</Command>
+    </CustomBuild>
+    <ClInclude Include="GeneratedFiles\ui_PlotWidget.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="RF_60x_QuadView_w.rc" />
+    <CustomBuild Include="DeviceDataWidget.ui">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Uic%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Uic%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+    </CustomBuild>
+    <None Include="main.qml" />
+    <CustomBuild Include="PlotWidget.ui">
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Uic%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Uic%27ing %(Identity)...</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\ui_%(Filename).h;%(Outputs)</Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\uic.exe" -o ".\GeneratedFiles\ui_%(Filename).h" "%(FullPath)"</Command>
+    </CustomBuild>
+    <None Include="properties.js" />
+    <None Include="RFDevice\RFDevice.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="RFDevice\RFDevice.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

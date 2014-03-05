@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include <QtQml>
+
 //local
 //#include <ComDeviceWorker.h>
 //#include <RFDevice.h>
@@ -11,7 +12,7 @@ int main(int argc, char *argv[])
 
 	
 
-	//qmlRegisterType<ComDeviceWorker>("com.ComDeviceWorker.rf", 1, 0, "ComDeviceWorker");
+	//qmlRegisterType<ComDeviceWorker>("com.ComDeviceWorker.rf", 1, 0, "ComDeviceWorker");	
 
     MainWindow w;
     w.show();

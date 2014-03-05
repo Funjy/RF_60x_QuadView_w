@@ -26,7 +26,13 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+	void AddWidgetToGrid(QWidget* widget);
+
 private:
+	//variables
+	int current_column;
+	int current_row;
+	//members
 	QQuickView * _view;
 	QWidget *_container;
     Ui::MainWindow *ui;

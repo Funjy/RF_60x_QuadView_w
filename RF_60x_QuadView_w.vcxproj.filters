@@ -45,6 +45,15 @@
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="Source Files\PlotWidget">
+      <UniqueIdentifier>{11e9350f-f6a6-4ed7-aa40-2fda592e7627}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RFDevice">
+      <UniqueIdentifier>{38d19a0c-c3da-4e69-bb66-e77e26cb8351}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\PlotWidget">
+      <UniqueIdentifier>{38838c94-d382-4d9a-a0db-ea0cc94a07e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -68,6 +77,51 @@
     <ClCompile Include="GeneratedFiles\Release\moc_ComDeviceWorker.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_PlotWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_PlotWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_qaxiszoomsvc.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_qaxiszoomsvc.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_qwheelzoomsvc.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_qwheelzoomsvc.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_qwtchartzoom.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_qwtchartzoom.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="PlotWidget.cpp">
+      <Filter>Source Files\PlotWidget</Filter>
+    </ClCompile>
+    <ClCompile Include="qaxiszoomsvc.cpp">
+      <Filter>Source Files\PlotWidget</Filter>
+    </ClCompile>
+    <ClCompile Include="qwheelzoomsvc.cpp">
+      <Filter>Source Files\PlotWidget</Filter>
+    </ClCompile>
+    <ClCompile Include="qwtchartzoom.cpp">
+      <Filter>Source Files\PlotWidget</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceDataWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_DeviceDataWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_DeviceDataWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -76,6 +130,27 @@
     <CustomBuild Include="ComDeviceWorker.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="PlotWidget.h">
+      <Filter>Header Files\PlotWidget</Filter>
+    </CustomBuild>
+    <CustomBuild Include="PlotWidget.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="qaxiszoomsvc.h">
+      <Filter>Header Files\PlotWidget</Filter>
+    </CustomBuild>
+    <CustomBuild Include="qwheelzoomsvc.h">
+      <Filter>Header Files\PlotWidget</Filter>
+    </CustomBuild>
+    <CustomBuild Include="qwtchartzoom.h">
+      <Filter>Header Files\PlotWidget</Filter>
+    </CustomBuild>
+    <CustomBuild Include="DeviceDataWidget.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="DeviceDataWidget.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.ui">
@@ -83,14 +158,94 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GeneratedFiles\ui_mainwindow.h">
+    <ClInclude Include="resource.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="GeneratedFiles\ui_PlotWidget.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RFDevice\include\RFString.h">
+      <Filter>Header Files\RFDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="RFDevice\include\RF060Device.h">
+      <Filter>Header Files\RFDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="RFDevice\include\RF085Device.h">
+      <Filter>Header Files\RFDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="RFDevice\include\RF25xDevice.h">
+      <Filter>Header Files\RFDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="RFDevice\include\RF603BDevice.h">
+      <Filter>Header Files\RFDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="RFDevice\include\RF603Device.h">
+      <Filter>Header Files\RFDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="RFDevice\include\RF603HSDevice.h">
+      <Filter>Header Files\RFDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="RFDevice\include\RF605Device.h">
+      <Filter>Header Files\RFDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="RFDevice\include\RF60xDevice.h">
+      <Filter>Header Files\RFDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="RFDevice\include\RF620Device.h">
+      <Filter>Header Files\RFDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="RFDevice\include\RF625Device.h">
+      <Filter>Header Files\RFDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="RFDevice\include\RF651Device.h">
+      <Filter>Header Files\RFDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="RFDevice\include\RF656Device.h">
+      <Filter>Header Files\RFDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="RFDevice\include\RF65xDevice.h">
+      <Filter>Header Files\RFDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="RFDevice\include\RF65xNDevice.h">
+      <Filter>Header Files\RFDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="RFDevice\include\RF700Device.h">
+      <Filter>Header Files\RFDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="RFDevice\include\RFComDetector.h">
+      <Filter>Header Files\RFDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="RFDevice\include\RFComDevice.h">
+      <Filter>Header Files\RFDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="RFDevice\include\RFDevice.h">
+      <Filter>Header Files\RFDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="RFDevice\include\RFDeviceDefs.h">
+      <Filter>Header Files\RFDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="RFDevice\include\RFLanDetector.h">
+      <Filter>Header Files\RFDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="RFDevice\include\RFLanDevice.h">
+      <Filter>Header Files\RFDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="RFDevice\include\RFQDPMotorDevice.h">
+      <Filter>Header Files\RFDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_DeviceDataWidget.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_mainwindow.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="RF_60x_QuadView_w.rc" />
+    <None Include="properties.js" />
+    <None Include="main.qml" />
+    <None Include="RFDevice\RFDevice.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="RFDevice\RFDevice.lib" />
   </ItemGroup>
 </Project>
