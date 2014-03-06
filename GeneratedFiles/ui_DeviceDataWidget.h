@@ -16,6 +16,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -32,7 +33,7 @@ public:
     QHBoxLayout *horizontalLayout_3;
     QSpacerItem *horizontalSpacer_3;
     QLabel *label_2;
-    QLabel *addressBox;
+    QLineEdit *addressBox;
     QSpacerItem *horizontalSpacer_4;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
@@ -82,10 +83,15 @@ public:
 
         horizontalLayout_3->addWidget(label_2);
 
-        addressBox = new QLabel(DeviceDataWidget);
+        addressBox = new QLineEdit(DeviceDataWidget);
         addressBox->setObjectName(QStringLiteral("addressBox"));
-        sizePolicy.setHeightForWidth(addressBox->sizePolicy().hasHeightForWidth());
-        addressBox->setSizePolicy(sizePolicy);
+        addressBox->setEnabled(true);
+        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Maximum);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(addressBox->sizePolicy().hasHeightForWidth());
+        addressBox->setSizePolicy(sizePolicy1);
+        addressBox->setMaximumSize(QSize(50, 16777215));
 
         horizontalLayout_3->addWidget(addressBox);
 
@@ -180,7 +186,6 @@ public:
     {
         DeviceDataWidget->setWindowTitle(QApplication::translate("DeviceDataWidget", "DeviceDataWidget", 0));
         label_2->setText(QApplication::translate("DeviceDataWidget", "Network address:", 0));
-        addressBox->setText(QApplication::translate("DeviceDataWidget", "N/A", 0));
         snLabel->setPlainText(QApplication::translate("DeviceDataWidget", "S/N:", 0));
         snBox->setText(QApplication::translate("DeviceDataWidget", "N/A", 0));
         baseDistLabel->setPlainText(QApplication::translate("DeviceDataWidget", "Base distance:", 0));

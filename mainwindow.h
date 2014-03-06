@@ -8,9 +8,12 @@
 #include <QQmlProperty>
 #include <QtQml>
 
-#include <ComDeviceWorker.h>
 #include <RFDevice.h>
 #include <RF603Device.h>
+
+#include <PlotWidget.h>
+#include <DeviceDataWidget.h>
+#include <DeviceWorker.h>
 
 using namespace RFDevice;
 
@@ -28,13 +31,21 @@ public:
 
 	void AddWidgetToGrid(QWidget* widget);
 
+public slots:
+	void IdentifyButtonPressed();
+
 private:
+	//const
+	const char* GET_CONNECT_PARAMETERS_FUNCTION;
 	//variables
 	int current_column;
 	int current_row;
+	bool _isConnected;	
 	//members
+	RF603Device * _sensor;
 	QQuickView * _view;
 	QWidget *_container;
+	QList<DeviceDataWidget*> _devWidgets;
     Ui::MainWindow *ui;
 };
 

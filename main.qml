@@ -42,9 +42,15 @@ Rectangle {
 
     function scanPorts()
     {
-        comDevWorker.FindActiveComPorts();
+        comDevWorker.findActiveComPorts();
         comPortsModel = comDevWorker.ComPorts;
         streamButton.enabled = comBox.count > 0
+    }
+
+    function getConnectParameters()
+    {
+//        a = [comBox.currentText.toString(), baudRateBox.currentText.toString(), periodBox.text.toString(), dumpFileBox.text.toString()];
+        return new Array(comBox.currentText.toString(), baudRateBox.currentText.toString(), periodBox.text.toString(), dumpFileBox.text.toString());
     }
 
 //    Component.onCompleted: scanPorts()

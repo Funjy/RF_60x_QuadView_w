@@ -85,16 +85,22 @@ void PlotWidget::AddPlotData(QString title, uint plotData)
 			symbol1->setSize(4);
 			curve->setSymbol(symbol1);
 		}
-		curve->attach(_plot);
-		_curves.insert(title, curve);		
+		QVector<QPointF> nData;
+		QPointF p(0, plotData);
+		nData.append(p);
+		curve->setSamples(nData);
+
+		curve->attach(_plot);		
+		_curves.insert(title, curve);
 	}
 	else
-	{
-		QwtPlotCurve *curve = _curves.take(title);				
-		QwtSeriesData<QPointF>* data = curve->data();			
-		int s = data->size();		
-		QPointF p(s, plotData);		
-		QVector<QPointF> nData(s+1);
+	{		
+		QwtPlotCurve *curve =_curves.value(title);
+		QwtSeriesData<QPointF>* data = curve->data();
+		int s = data->size();
+		QPointF p(s, plotData);
+		//QVector<QPointF> nData(s+1);
+		QVector<QPointF> nData;
 		for(int i = 0; i < s; i++)
 		{			
 			QPointF p(data->sample(i).x(), data->sample(i).y());
@@ -104,9 +110,7 @@ void PlotWidget::AddPlotData(QString title, uint plotData)
 		curve->setSamples(nData);
 	}
 	
-	CheckNReplot();
-	
-	
+	CheckNReplot();	
 }
 
 //ConvertData
@@ -130,7 +134,7 @@ QRectF PlotWidget::CreateRectForCurve(QwtPlotCurve *curve)
 
 void PlotWidget::RemovePlotData(QString title)
 {
-	QwtPlotCurve *c = _curves.take(title);
+	QwtPlotCurve *c = _curves.value(title);
 	if(c == NULL)
 		return;
 	c->detach();
@@ -156,7 +160,7 @@ void PlotWidget::SetShowMarkers(bool showMarkers)
 
 void PlotWidget::ChangeSeriesTitle(QString oldTitle, QString newTitle)
 {
-	QwtPlotCurve *c = _curves.take(oldTitle);
+	QwtPlotCurve *c = _curves.value(oldTitle);
 	c->setTitle(newTitle);
 	//Replot();
 }

@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "ui_DeviceDataWidget.h"
 #include <PlotWidget.h>
+#include <DeviceWorker.h>
 
 class DeviceDataWidget : public QWidget
 {
@@ -20,6 +21,12 @@ public:
 	void SetPlotWidget(PlotWidget* widget);
 	PlotWidget* GetPlotWidget() const { return _plot; }
 
+	DeviceWorker* DevWorker() const { return _devWorker; }
+	void DevWorker(DeviceWorker* val) { 
+		QMetaObject::Connection con = connect(val, &DeviceWorker::NewValueReceived, this, &DeviceDataWidget::onNewPlotValue);
+		_devWorker = val; 
+	}
+
 	QString	NetworkAddress() const {return ui.addressBox->text();}
 	void	NetworkAddress(QString var) {ui.addressBox->setText(var);}
 
@@ -32,10 +39,14 @@ public:
 	QString	Range() const {return ui.rangeBox->text();}
 	void	Range(QString var) {ui.rangeBox->setText(var);}
 
+public slots:
+	void onNewPlotValue(float value);
 
 private:
-	bool _onTop;	
+	bool _onTop;
+	QString _plotTitle;
 	PlotWidget* _plot;
+	DeviceWorker* _devWorker;	
 	Ui::DeviceDataWidget ui;
 };
 
