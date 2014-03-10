@@ -26,6 +26,7 @@ Rectangle {
     signal scanPortsRequested()
     signal deviceIdentificationRequested()
     signal streamButtonClicked()
+    signal imLoaded()
 
     function setConnectButtonEnabled(en)
     {
@@ -85,12 +86,21 @@ Rectangle {
         return new Array(comBox.currentText.toString(), baudRateBox.currentText.toString(), periodBox.text.toString(), dumpFileBox.text.toString());
     }
 
+    function setConnectParameters(params)
+    {
+        var bri = baudRateBox.find(params[1])
+        if(bri !== -1)
+            baudRateBox.currentIndex(bri)
+        periodBox.text = params[2]
+        dumpFileBox.text = params[3]
+    }
+
 //    Component.onCompleted: scanPorts()
 
     Component.onCompleted: {
         isConnectButtonEnabled = false;
         streamButton.enabled = false;
-    }
+    }    
 
     ComDeviceWorker{
         id: comDevWorker
@@ -141,6 +151,9 @@ Rectangle {
                 Layout.fillWidth: true
                 model: baudRatesModel
                 enabled: root.isComParametersEnabled
+                Component.onCompleted: {
+                    imLoaded()
+                }
             }
 
             Text {

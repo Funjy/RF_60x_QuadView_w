@@ -65,7 +65,10 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(this, &MainWindow::StatusChanged, this, &MainWindow::SetStatus);
 	connect(this, &MainWindow::IdentificationCompleteSignal, this, &MainWindow::IdentificationComplete);
 	connect(&_streamTimer, &QTimer::timeout, this, &MainWindow::onTimerTick);
-		
+
+	_appDir = QCoreApplication::applicationDirPath();
+	_iniFilePath = _appDir + "\\file.ini";
+	ReadParametersFromFile();
 }
 
 MainWindow::~MainWindow()
@@ -125,6 +128,7 @@ void MainWindow::IdentifyButtonPressed()
 		if(!chk)
 			return;
 		QStringList sl = ret.toStringList();*/
+		WriteParametersToFile();
 		ReadUiParameters();
 		QFuture<void> future = QtConcurrent::run(this, &MainWindow::IdentifyDevices, _uiParameters);
 		SwitchNetworkAdressBoxexState(false);
@@ -341,4 +345,43 @@ void MainWindow::SetInfos()
 		//dev->DevWorker()->ReceiveNewValues();
 		dev->ConnectionStatus(true);
 	}
+}
+
+void MainWindow::ReadParametersFromFile()
+{
+	QStringList paramsList;
+	bool chk;
+	chk = _fileWorker.OpenINIFile(_iniFilePath);
+	if(!chk)
+		return;	
+	QString val;
+	chk = _fileWorker.ReadINIValue(COM_NUMBER_KEY, &val);
+	if(chk)
+		paramsList.append(val);
+	chk = _fileWorker.ReadINIValue(COM_SPEED_KEY, &val);
+	if(chk)
+		paramsList.append(val);
+	chk = _fileWorker.ReadINIValue(STREAM_INTERVAL_KEY, &val);
+	if(chk)
+		paramsList.append(val);
+	chk = _fileWorker.ReadINIValue(DUMP_FILE_KEY, &val);
+	if(chk)
+		paramsList.append(val);
+	_fileWorker.CloseFile();
+	QVariant toSend = QVariant::fromValue(paramsList);
+	chk = QMetaObject::invokeMethod(_view->rootObject(), "setConnectParameters", Q_ARG(QVariant, toSend));	
+}
+
+void MainWindow::WriteParametersToFile()
+{
+	bool chk;
+	chk = _fileWorker.OpenINIFile(_iniFilePath);
+	if(!chk)
+		return;
+	ReadUiParameters();
+	chk = _fileWorker.WriteINILine(COM_NUMBER_KEY, _uiParameters[INDEX_COM_NUMBER]);
+	chk = _fileWorker.WriteINILine(COM_SPEED_KEY, _uiParameters[INDEX_COM_SPEED]);
+	chk = _fileWorker.WriteINILine(STREAM_INTERVAL_KEY, _uiParameters[INDEX_INTERVAL]);
+	chk = _fileWorker.WriteINILine(DUMP_FILE_KEY, _uiParameters[INDEX_DUMP_FILENAME]);
+	_fileWorker.CloseFile();	
 }

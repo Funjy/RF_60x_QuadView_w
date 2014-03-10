@@ -17,6 +17,7 @@
 #include <PlotWidget.h>
 #include <DeviceDataWidget.h>
 #include <DeviceWorker.h>
+#include <TextFileWorker.h>
 
 //QML functions
 #define STREAM_BUTTON_IsSTREAMING_QML_FUNCTION "setStreamButtonState"
@@ -40,6 +41,12 @@
 #define INDEX_INTERVAL 2
 #define INDEX_DUMP_FILENAME 3
 
+//Ui parameters keys for saving
+#define COM_NUMBER_KEY "Com_port_number"
+#define COM_SPEED_KEY "Com_speed"
+#define STREAM_INTERVAL_KEY "Stream_Interval"
+#define DUMP_FILE_KEY "Dump_File_Name"
+
 using namespace RFDevice;
 
 namespace Ui {
@@ -53,6 +60,9 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+	void ReadParametersFromFile();
+	void WriteParametersToFile();
 
 	//not implemented
 	void AddWidgetToGrid(QWidget* widget);
@@ -91,7 +101,6 @@ public slots:
 	}
 
 	void onTimerTick();
-
 private:
 	//const
 	const char* GET_CONNECT_PARAMETERS_FUNCTION;	
@@ -102,11 +111,14 @@ private:
 	bool _isStreaming;
 	int _connectedDevices;
 	QString _lastOpenedPort;
+	QString _appDir;
+	QString _iniFilePath;
 	QMutex _identifyMutex;
 	QMutex _streamMutex;
 	QTimer _streamTimer;
 	QStringList _uiParameters;
 	//members
+	TextFileWorker _fileWorker;
 	RF603Device * _sensor;
 	QQuickView * _view;
 	QWidget *_container;

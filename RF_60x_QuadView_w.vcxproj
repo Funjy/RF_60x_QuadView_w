@@ -186,6 +186,7 @@
     <ClCompile Include="qaxiszoomsvc.cpp" />
     <ClCompile Include="qwheelzoomsvc.cpp" />
     <ClCompile Include="qwtchartzoom.cpp" />
+    <ClCompile Include="TextFileWorker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mainwindow.h">
@@ -213,6 +214,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="TextFileWorker.h" />
     <CustomBuild Include="DeviceDataWidget.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing DeviceDataWidget.h...</Message>
