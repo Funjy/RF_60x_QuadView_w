@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>673</width>
-    <height>382</height>
+    <height>312</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,6 +16,9 @@
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
     <layout class="QVBoxLayout" name="mainLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
      <item>
       <layout class="QHBoxLayout" name="topLayout"/>
      </item>
@@ -43,7 +46,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>Network address:</string>
+          <string>Network address: </string>
          </property>
         </widget>
        </item>
@@ -63,6 +66,51 @@
            <width>50</width>
            <height>16777215</height>
           </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_7">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>12</width>
+           <height>1</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="statusLabel">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Status:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="statusBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Not connected</string>
+         </property>
+         <property name="scaledContents">
+          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -114,7 +162,7 @@
           </sizepolicy>
          </property>
          <property name="plainText">
-          <string>S/N:</string>
+          <string>Serial: </string>
          </property>
         </widget>
        </item>
@@ -156,7 +204,7 @@
           </sizepolicy>
          </property>
          <property name="plainText">
-          <string>Base distance:</string>
+          <string>Base distance: </string>
          </property>
         </widget>
        </item>
@@ -198,7 +246,7 @@
           </sizepolicy>
          </property>
          <property name="plainText">
-          <string>Range:</string>
+          <string>Range: </string>
          </property>
         </widget>
        </item>

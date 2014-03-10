@@ -12,7 +12,7 @@ PlotWidget::PlotWidget(QWidget *parent)
 	_plot = new QwtPlot();
 	//Legend
 	_leg = new QwtLegend();	
-	_plot->insertLegend(_leg, QwtPlot::TopLegend);
+	//_plot->insertLegend(_leg, QwtPlot::TopLegend);	
 	//Grid
 	_grid = new QwtPlotGrid();
 	_grid->enableXMin(true);
@@ -41,7 +41,7 @@ void PlotWidget::SetAutoUpdatePlot(bool autoUpdatePlot)
 	CheckNReplot();
 }
 
-void PlotWidget::AddPlotData(QString title, uint* plotData, int size, bool showMarkers)
+void PlotWidget::AddPlotData(QString title, float* plotData, int size, bool showMarkers)
 {	
 	if(_curves.contains(title))
 		return;
@@ -55,11 +55,11 @@ void PlotWidget::AddPlotData(QString title, uint* plotData, int size, bool showM
 	//Marker
 	if(_showMarkers || showMarkers)
 	{
-		QwtSymbol *symbol1 = new QwtSymbol();
+		/*QwtSymbol *symbol1 = new QwtSymbol();
 		symbol1->setStyle(QwtSymbol::Ellipse);
 		symbol1->setPen(QColor(Qt::black));	
-		symbol1->setSize(4);
-		curve->setSymbol(symbol1);
+		symbol1->setSize(4);*/
+		curve->setSymbol(GetDefaultMarker());
 	}
 	//Кривая добавляется на график
 	curve->attach(_plot);
@@ -69,7 +69,7 @@ void PlotWidget::AddPlotData(QString title, uint* plotData, int size, bool showM
 	CheckNReplot();
 }
 
-void PlotWidget::AddPlotData(QString title, uint plotData)
+void PlotWidget::AddPlotData(QString title, float plotData)
 {
 	if(!_curves.contains(title))
 	{
@@ -79,14 +79,14 @@ void PlotWidget::AddPlotData(QString title, uint plotData)
 		
 		if(_showMarkers)
 		{
-			QwtSymbol *symbol1 = new QwtSymbol();
+			/*QwtSymbol *symbol1 = new QwtSymbol();
 			symbol1->setStyle(QwtSymbol::Ellipse);
 			symbol1->setPen(QColor(Qt::black));	
-			symbol1->setSize(4);
-			curve->setSymbol(symbol1);
+			symbol1->setSize(4);*/
+			curve->setSymbol(GetDefaultMarker());
 		}
 		QVector<QPointF> nData;
-		QPointF p(0, plotData);
+		QPointF p(0, plotData);		
 		nData.append(p);
 		curve->setSamples(nData);
 
@@ -114,7 +114,7 @@ void PlotWidget::AddPlotData(QString title, uint plotData)
 }
 
 //ConvertData
-QwtPointSeriesData * PlotWidget::CreatePointSeriesFromArray(uint* plotData, int size)
+QwtPointSeriesData * PlotWidget::CreatePointSeriesFromArray(float* plotData, int size)
 {
 	QVector<QPointF> qv;
 	for (int i = 0; i < size; i++)
@@ -150,7 +150,12 @@ void PlotWidget::SetShowLegend(bool showLegend)
 	if(!showLegend)		
 		_leg->contentsWidget()->hide();
 	else
+	{
+		if(_plot->legend() == NULL)
+			_plot->insertLegend(_leg, QwtPlot::TopLegend);
 		_leg->contentsWidget()->show();
+	}
+
 }
 
 void PlotWidget::SetShowMarkers(bool showMarkers)
@@ -208,4 +213,13 @@ PlotWidget::~PlotWidget()
 	}
 	delete _plot;
 	
+}
+
+QwtSymbol* PlotWidget::GetDefaultMarker()
+{
+	QwtSymbol *symbol1 = new QwtSymbol();
+	symbol1->setStyle(QwtSymbol::Ellipse);
+	symbol1->setPen(QColor(Qt::black));	
+	symbol1->setSize(2);
+	return symbol1;
 }

@@ -27,8 +27,8 @@ public:
 	PlotWidget(QWidget *parent = 0);
 	
 	~PlotWidget();
-	void AddPlotData(QString title, uint* plotData, int size, bool showMarkers = false);
-	void AddPlotData(QString title, uint plotData);
+	void AddPlotData(QString title, float* plotData, int size, bool showMarkers = false);
+	void AddPlotData(QString title, float plotData);
 	void RemovePlotData(QString title);
 	void SetAutoUpdatePlot(bool autoUpdatePlot);
 	void SetShowLegend(bool showLegend);
@@ -40,7 +40,7 @@ public:
 private:
 	//Funcs
 	void CheckNReplot();
-	QwtPointSeriesData * CreatePointSeriesFromArray(uint* plotData, int size);
+	QwtPointSeriesData * CreatePointSeriesFromArray(float* plotData, int size);
 	QRectF CreateRectForCurve(QwtPlotCurve *curve);
 	//Members
 	bool _autoUpdatePlot;
@@ -55,6 +55,8 @@ private:
 	QAxisZoomSvc *_axisZoom;
 	QMap<QString, QwtPlotCurve*> _curves;	
 	Ui::PlotWidget ui;
+
+	QwtSymbol* GetDefaultMarker();
 };
 
 #endif // PLOTWIDGET_H

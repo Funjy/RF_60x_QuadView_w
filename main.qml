@@ -13,47 +13,84 @@ Rectangle {
 
     implicitWidth: rootCol.implicitWidth
 
-    property bool isConnectControlsEnabled: true
+    property bool isComParametersEnabled: true
+    property bool isStreamParametersEnabled: true
+    property bool isConnectButtonEnabled: true
 
     property int fontSize: Styles.labelFontSize
 
     property var comPortsModel
     property var baudRatesModel: ["9600", "115200", "230400", "460800", "921600"]
 
+    signal beforeScanPortsRequested()
     signal scanPortsRequested()
     signal deviceIdentificationRequested()
-    signal startStreamRequested()
+    signal streamButtonClicked()
+
+    function setConnectButtonEnabled(en)
+    {
+        identificationButton.enabled = en
+    }
+
+    function setConnectButtonState(connected)
+    {
+        if(connected)
+        {
+            identificationButton.text = qsTr("Disconnect")
+            isComParametersEnabled = false
+        }
+        else
+        {
+            identificationButton.text = qsTr("Device identification")
+            isComParametersEnabled = true
+        }
+    }
+
+    function setStreamButtonEnabled(en)
+    {
+        streamButton.enabled = en
+    }
 
     function switchState(enabled){
-        isConnectControlsEnabled = enabled
+        isStreamParametersEnabled = enabled
+        isConnectButtonEnabled = enabled
         streamButton.enabled = enabled
     }
 
-    function connectedButtonState(connected){
+    function setStreamButtonState(connected){
 //        streamButton.enabled = true
         if(connected)
         {
             streamButton.enabled = true
             streamButton.text = qsTr("Stop stream")
+            isStreamParametersEnabled = false
         }
         else
-            streamButton.text = qsTr("StartStream")
+        {
+            streamButton.text = qsTr("Start Stream")
+            isStreamParametersEnabled = true
+        }
     }
 
     function scanPorts()
     {
+        beforeScanPortsRequested();
         comDevWorker.findActiveComPorts();
         comPortsModel = comDevWorker.ComPorts;
-        streamButton.enabled = comBox.count > 0
+        scanPortsRequested();
     }
 
     function getConnectParameters()
     {
-//        a = [comBox.currentText.toString(), baudRateBox.currentText.toString(), periodBox.text.toString(), dumpFileBox.text.toString()];
         return new Array(comBox.currentText.toString(), baudRateBox.currentText.toString(), periodBox.text.toString(), dumpFileBox.text.toString());
     }
 
 //    Component.onCompleted: scanPorts()
+
+    Component.onCompleted: {
+        isConnectButtonEnabled = false;
+        streamButton.enabled = false;
+    }
 
     ComDeviceWorker{
         id: comDevWorker
@@ -70,13 +107,13 @@ Rectangle {
             columnSpacing: 10
             columns: 2
 
-            Button{
+            Button{                
                 text: qsTr("Scan ports")
                 Layout.columnSpan: 2
                 Layout.fillWidth: true
 //                onClicked: scanPortsRequested()
                 onClicked: scanPorts()
-                enabled: root.isConnectControlsEnabled
+                enabled: root.isComParametersEnabled
             }
 
             Text{
@@ -88,7 +125,10 @@ Rectangle {
                 id: comBox
                 Layout.fillWidth: true
                 model: root.comPortsModel
-                enabled: root.isConnectControlsEnabled
+                enabled: root.isComParametersEnabled
+                onCurrentTextChanged: {
+                    identificationButton.enabled = !(currentText === "" || currentText === "Not found");
+                }
             }
 
             Text {
@@ -100,7 +140,7 @@ Rectangle {
                 id: baudRateBox
                 Layout.fillWidth: true
                 model: baudRatesModel
-                enabled: root.isConnectControlsEnabled
+                enabled: root.isComParametersEnabled
             }
 
             Text {
@@ -111,7 +151,7 @@ Rectangle {
             TextField{
                 id: periodBox
                 Layout.fillWidth: true
-                enabled: root.isConnectControlsEnabled
+                enabled: root.isStreamParametersEnabled
             }
 
             Text {
@@ -122,15 +162,16 @@ Rectangle {
             TextField{
                 id: dumpFileBox
                 Layout.fillWidth: true
-                enabled: root.isConnectControlsEnabled
+                enabled: root.isStreamParametersEnabled
             }
 
             Button{
+                id: identificationButton
                 text: qsTr("Device identification")
                 Layout.columnSpan: 2
                 Layout.fillWidth: true
                 onClicked: deviceIdentificationRequested()
-                enabled: root.isConnectControlsEnabled
+                enabled: root.isConnectButtonEnabled
             }
 
             Button{
@@ -138,7 +179,7 @@ Rectangle {
                 text: qsTr("Start stream")
                 Layout.columnSpan: 2
                 Layout.fillWidth: true
-                onClicked: startStreamRequested()
+                onClicked: streamButtonClicked()
             }
         }
     }

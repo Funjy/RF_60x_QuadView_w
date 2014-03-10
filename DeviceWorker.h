@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include <QStringList>
+#include <QMutex>
+
 #include <RFComDevice.h>
 #include <RF603Device.h>
 
@@ -36,6 +38,9 @@ public:
 	WORD Serial() const { return _serial; }
 	//void Serial(WORD val) { _serial = val; }
 
+	bool IsConnected() const { return _isConnected; }
+	void IsConnected(bool val) { _isConnected = val; }
+
 	BYTE DevAddress() const { return _devAddress; }
 	void DevAddress(BYTE val) { _devAddress = val; }
 
@@ -44,22 +49,28 @@ public:
 
 	bool ReceiveInfo(BYTE address);
 	bool ReceiveInfo();
+	void ReceiveNewValues(BYTE address);
 	void ReceiveNewValues();
 
 	bool LockResult(BYTE address);
 
 	Q_INVOKABLE void findActiveComPorts();
 
+	static QList<QString> OpenedPorts;
+	static QMutex CheckOpenedPortsMutex;
+	static float RecalcValue(USHORT value, USHORT range);
+
 signals:
 	void ComPortsChanged();
 	void NewValueReceived(float newValue);
+	void ComPortsScanned();
 
 private:
 	//variables
 	WORD _maxDistance;	
 	WORD _range;	
 	WORD _serial;	
-	bool _isConnected;
+	bool _isConnected;	
 	BYTE _devAddress;
 	//members
 	QStringList _comPorts;

@@ -34,6 +34,9 @@ public:
     QSpacerItem *horizontalSpacer_3;
     QLabel *label_2;
     QLineEdit *addressBox;
+    QSpacerItem *horizontalSpacer_7;
+    QLabel *statusLabel;
+    QLabel *statusBox;
     QSpacerItem *horizontalSpacer_4;
     QHBoxLayout *horizontalLayout;
     QSpacerItem *horizontalSpacer;
@@ -52,13 +55,13 @@ public:
     {
         if (DeviceDataWidget->objectName().isEmpty())
             DeviceDataWidget->setObjectName(QStringLiteral("DeviceDataWidget"));
-        DeviceDataWidget->resize(673, 382);
+        DeviceDataWidget->resize(673, 312);
         horizontalLayout_2 = new QHBoxLayout(DeviceDataWidget);
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         mainLayout = new QVBoxLayout();
-        mainLayout->setSpacing(6);
+        mainLayout->setSpacing(0);
         mainLayout->setObjectName(QStringLiteral("mainLayout"));
         topLayout = new QHBoxLayout();
         topLayout->setSpacing(6);
@@ -94,6 +97,25 @@ public:
         addressBox->setMaximumSize(QSize(50, 16777215));
 
         horizontalLayout_3->addWidget(addressBox);
+
+        horizontalSpacer_7 = new QSpacerItem(12, 1, QSizePolicy::Fixed, QSizePolicy::Minimum);
+
+        horizontalLayout_3->addItem(horizontalSpacer_7);
+
+        statusLabel = new QLabel(DeviceDataWidget);
+        statusLabel->setObjectName(QStringLiteral("statusLabel"));
+        sizePolicy.setHeightForWidth(statusLabel->sizePolicy().hasHeightForWidth());
+        statusLabel->setSizePolicy(sizePolicy);
+
+        horizontalLayout_3->addWidget(statusLabel);
+
+        statusBox = new QLabel(DeviceDataWidget);
+        statusBox->setObjectName(QStringLiteral("statusBox"));
+        sizePolicy.setHeightForWidth(statusBox->sizePolicy().hasHeightForWidth());
+        statusBox->setSizePolicy(sizePolicy);
+        statusBox->setScaledContents(false);
+
+        horizontalLayout_3->addWidget(statusBox);
 
         horizontalSpacer_4 = new QSpacerItem(40, 1, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -185,12 +207,14 @@ public:
     void retranslateUi(QWidget *DeviceDataWidget)
     {
         DeviceDataWidget->setWindowTitle(QApplication::translate("DeviceDataWidget", "DeviceDataWidget", 0));
-        label_2->setText(QApplication::translate("DeviceDataWidget", "Network address:", 0));
-        snLabel->setPlainText(QApplication::translate("DeviceDataWidget", "S/N:", 0));
+        label_2->setText(QApplication::translate("DeviceDataWidget", "Network address: ", 0));
+        statusLabel->setText(QApplication::translate("DeviceDataWidget", "Status:", 0));
+        statusBox->setText(QApplication::translate("DeviceDataWidget", "Not connected", 0));
+        snLabel->setPlainText(QApplication::translate("DeviceDataWidget", "Serial: ", 0));
         snBox->setText(QApplication::translate("DeviceDataWidget", "N/A", 0));
-        baseDistLabel->setPlainText(QApplication::translate("DeviceDataWidget", "Base distance:", 0));
+        baseDistLabel->setPlainText(QApplication::translate("DeviceDataWidget", "Base distance: ", 0));
         baseDistBox->setText(QApplication::translate("DeviceDataWidget", "N/A", 0));
-        rangeLabel->setPlainText(QApplication::translate("DeviceDataWidget", "Range:", 0));
+        rangeLabel->setPlainText(QApplication::translate("DeviceDataWidget", "Range: ", 0));
         rangeBox->setText(QApplication::translate("DeviceDataWidget", "N/A", 0));
     } // retranslateUi
 

@@ -26,10 +26,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
 	_sensor = new RF603Device();
 	_isConnected = false;
+	_isStreaming = false;
 	current_column	= 0;
 	current_row		= 0;
+	_connectedDevices = 0;
 
-	
+	_statusLabel = new QLabel(this);
+	_statusLabel->setMargin(4);
+	_statusLabel->setText(READY_STATUS);
+	ui->statusBar->addWidget(_statusLabel);
 
 	DeviceDataWidget* ddw = new DeviceDataWidget();
 	ddw->NetworkAddress("1");
@@ -41,7 +46,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui->graphsLayout->addWidget(ddw);
 	_devWidgets.append(ddw);
 	//////////////////////////////////////////////////////////////////////////
-	DeviceDataWidget* ddw1 = new DeviceDataWidget();	
+	DeviceDataWidget* ddw1 = new DeviceDataWidget();
 	ddw1->NetworkAddress("2");
 	PlotWidget* pw1 = new PlotWidget();
 	pw1->SetShowLegend(false);
@@ -49,15 +54,18 @@ MainWindow::MainWindow(QWidget *parent) :
 	DeviceWorker* dw1 = new DeviceWorker();
 	ddw1->DevWorker(dw1);
 	ui->graphsLayout->addWidget(ddw1);
-	_devWidgets.append(ddw1);	
+	_devWidgets.append(ddw1);
+	//////////////////////////////////////////////////////////////////////////
 
 	QQuickItem* root = _view->rootObject();
 	QMetaObject::Connection con1 = connect(root, SIGNAL(deviceIdentificationRequested()), this, SLOT(IdentifyButtonPressed()));
-
-	/*QStringList list;
-	list.append("228");
-	list.append("1337");
-	bool chk = QQmlProperty::write(root, "comPortsModel", QVariant::fromValue(list));*/
+	QMetaObject::Connection con2 = connect(root, SIGNAL(scanPortsRequested()), this, SLOT(Reconnect()));
+	QMetaObject::Connection con3 = connect(root, SIGNAL(beforeScanPortsRequested()), this, SLOT(BeforeScanRequested()));
+	connect(root, SIGNAL(streamButtonClicked()), this, SLOT(onStreamButtonPressed()));
+	connect(this, &MainWindow::StatusChanged, this, &MainWindow::SetStatus);
+	connect(this, &MainWindow::IdentificationCompleteSignal, this, &MainWindow::IdentificationComplete);
+	connect(&_streamTimer, &QTimer::timeout, this, &MainWindow::onTimerTick);
+		
 }
 
 MainWindow::~MainWindow()
@@ -85,43 +93,252 @@ void MainWindow::AddWidgetToGrid(QWidget* widget)
 }
 
 void MainWindow::IdentifyButtonPressed()
-{
-	const int comPortIndex = 0;
-	const int comSpeedIndex = 1;
-	QVariant ret;	
-	bool chk = QMetaObject::invokeMethod(_view->rootObject(), "getConnectParameters", Q_RETURN_ARG(QVariant, ret));		
-	QStringList sl = ret.toStringList();
-	if(_isConnected)
+{	
+	QVariant par;
+	bool locked = _identifyMutex.tryLock();
+	if(!locked)
+		return;
+	if(_connectedDevices > 0)
+	{
+		//Disconnecting
+		StopStreaming();
 		_sensor->ClosePort();
-	chk = _sensor->OpenPort(sl[comPortIndex].toUtf8().constData(), sl[comSpeedIndex].toULong());
+		_isConnected = false;
+		_connectedDevices = 0;
+		SwitchConnectedStatus(false);
+		SetInfos();
+		SwitchNetworkAdressBoxexState(true);
+		par = QVariant::fromValue(false);
+		QMetaObject::invokeMethod(_view->rootObject(), CONNECT_BUTTON_CONNECTED_QML_FUNCTION, Q_ARG(QVariant, par));
+		QMetaObject::invokeMethod(_view->rootObject(), STREAM_BUTTON_IsSTREAMING_QML_FUNCTION, Q_ARG(QVariant, par));
+		QMetaObject::invokeMethod(_view->rootObject(), STREAM_BUTTON_ENABLED_QML_FUNCTION, Q_ARG(QVariant, par));	
+		//QMetaObject::invokeMethod(_view->rootObject(), "parametersInterfaceIsEnabled", Q_ARG(QVariant, true));
+		_identifyMutex.unlock();
+	}
+	else
+	{
+		//Connecting		
+		par = QVariant::fromValue(false);
+		//QMetaObject::invokeMethod(_view->rootObject(), "parametersInterfaceIsEnabled", Q_ARG(QVariant, par));
+		/*QVariant ret;
+		bool chk = QMetaObject::invokeMethod(_view->rootObject(), GET_CONNECT_PARAMETERS_QML_FUNCTION, Q_RETURN_ARG(QVariant, ret));
+		if(!chk)
+			return;
+		QStringList sl = ret.toStringList();*/
+		ReadUiParameters();
+		QFuture<void> future = QtConcurrent::run(this, &MainWindow::IdentifyDevices, _uiParameters);
+		SwitchNetworkAdressBoxexState(false);
+		par = QVariant::fromValue(true);
+		QMetaObject::invokeMethod(_view->rootObject(), CONNECT_BUTTON_CONNECTED_QML_FUNCTION, Q_ARG(QVariant, par));
+		QMetaObject::invokeMethod(_view->rootObject(), CONNECT_BUTTON_ENABLED_QML_FUNCTION, Q_ARG(QVariant, false));
+	}
+}
+
+void MainWindow::IdentificationComplete()
+{
+	bool chk = false;
+	SetInfos();
+	bool enabled = _connectedDevices > 0;
+	QVariant par = enabled;
+	chk = QMetaObject::invokeMethod(_view->rootObject(), STREAM_BUTTON_ENABLED_QML_FUNCTION, Q_ARG(QVariant, par));
+	QMetaObject::invokeMethod(_view->rootObject(), CONNECT_BUTTON_ENABLED_QML_FUNCTION, Q_ARG(QVariant, true));
+	emit StatusChanged(READY_STATUS);
+	_identifyMutex.unlock();
+	if(!enabled)
+	{
+		_connectedDevices = 1;
+		IdentifyButtonPressed();
+	}
+}
+
+void MainWindow::Reconnect()
+{	
+	_sensor = new RF603Device();
+	bool retry;
+	retry = _isConnected;
+	_isConnected = false;
+	if(retry)
+		IdentifyButtonPressed();	
+}
+
+void MainWindow::BeforeScanRequested()
+{
+	if(!_sensor)
+		return;
+	bool chk = false;
+	if(_isConnected)
+		chk = _sensor->ClosePort();
+	delete _sensor;
+	_sensor = 0;
+}
+
+void MainWindow::IdentifyDevices(QStringList sl)
+{
+	emit StatusChanged(IDENTIFY_STATUS);	
+	bool chk = false;
+	if(_isConnected)
+	{
+		_sensor->ClosePort();
+	}
+	chk = _sensor->OpenPort(sl[INDEX_COM_NUMBER].toUtf8().constData(), sl[INDEX_COM_SPEED].toULong());
 	_isConnected = chk;
 	if(!chk)
 	{
+		_lastOpenedPort = "";
+		_connectedDevices = 0;
+		DeviceDataWidget* dev;
+		foreach(dev, _devWidgets)
+		{
+			dev->DevWorker()->IsConnected(false);
+		}
 		return;
 	}
+	_lastOpenedPort = sl[INDEX_COM_NUMBER];
+
+	int found = 0;
 
 	DeviceDataWidget* dev;
 	foreach(dev, _devWidgets)
 	{
 		dev->DevWorker()->Sensor(_sensor);
 		chk = dev->DevWorker()->ReceiveInfo(dev->NetworkAddress().toUShort());
+		dev->DevWorker()->IsConnected(chk);
+		dev->DevWorker()->DevAddress(dev->NetworkAddress().toUShort());
+		found += chk ? 1 : 0;
+	}
+	_connectedDevices = found;
+	emit IdentificationCompleteSignal();
+}
+
+void MainWindow::onStreamButtonPressed()
+{
+	if(!_isStreaming)
+	{
+		//Start stream
+		if(!_isConnected)
+		{
+			QMessageBox::warning(this, "Warning", "No devices identified.");
+			return;
+		}
+
+		ReadUiParameters();
+		if(_uiParameters[INDEX_INTERVAL].compare("") == 0)
+		{
+			QMessageBox::warning(this, "Warning", "Period not set.");
+			return;
+		}
+		QString timeout = _uiParameters[INDEX_INTERVAL];
+		_streamTimer.setInterval(timeout.toInt());
+		_streamTimer.setSingleShot(true);
+		ClearGraphs();
+		emit StatusChanged(STREAMING_STATUS);
+		UpdateMeasures();
+		QVariant par = QVariant::fromValue(false);
+		par = QVariant::fromValue(true);
+		QMetaObject::invokeMethod(_view->rootObject(), STREAM_BUTTON_IsSTREAMING_QML_FUNCTION, Q_ARG(QVariant, par));
+		_isStreaming = true;
+	}
+	else
+	{
+		//Stop stream
+		StopStreaming();
+	}
+}
+
+void MainWindow::UpdateMeasures()
+{
+	_streamMutex.lock();
+
+	_sensor->LockResult(0);	
+
+	DeviceDataWidget* dev;
+	foreach (dev, _devWidgets)
+	{
+		dev->DevWorker()->ReceiveNewValues();
+	}
+
+	_streamMutex.unlock();
+
+	_streamTimer.start();
+
+}
+
+void MainWindow::onTimerTick()
+{
+	UpdateMeasures();
+}
+
+bool MainWindow::ReadUiParameters()
+{
+	QVariant ret;
+	bool chk = QMetaObject::invokeMethod(_view->rootObject(), GET_CONNECT_PARAMETERS_QML_FUNCTION, Q_RETURN_ARG(QVariant, ret));
+	if(!chk)
+		return chk;
+	QStringList sl = ret.toStringList();
+	_uiParameters = sl;
+	return chk;
+}
+
+void MainWindow::ClearGraphs()
+{
+	DeviceDataWidget* dev;
+	foreach (dev, _devWidgets)
+	{
+		dev->ClearPlot();
+	}
+}
+
+void MainWindow::StopStreaming()
+{
+	if(!_isStreaming)
+		return;
+	_streamTimer.stop();
+	_streamMutex.lock();
+	_streamMutex.unlock();
+	QVariant par = QVariant::fromValue(true);
+	//QMetaObject::invokeMethod(_view->rootObject(), "parametersInterfaceIsEnabled", Q_ARG(QVariant, par));
+	par = QVariant::fromValue(false);
+	QMetaObject::invokeMethod(_view->rootObject(), STREAM_BUTTON_IsSTREAMING_QML_FUNCTION, Q_ARG(QVariant, par));
+	emit StatusChanged(READY_STATUS);
+	_isStreaming = false;
+}
+
+void MainWindow::SwitchNetworkAdressBoxexState(bool enabled)
+{
+	DeviceDataWidget* dev;
+	foreach (dev, _devWidgets)
+	{
+		dev->IsNetworkAddressEnabled(enabled);
+	}
+}
+
+void MainWindow::SwitchConnectedStatus(bool connected)
+{
+	DeviceDataWidget* dev;
+	foreach (dev, _devWidgets)
+	{
+		dev->DevWorker()->IsConnected(connected);
+	}
+}
+
+void MainWindow::SetInfos()
+{
+	DeviceDataWidget* dev;
+	foreach(dev, _devWidgets)
+	{
+		bool chk = dev->DevWorker()->IsConnected();
 		if(!chk)
 		{
 			dev->SerialNumber("N/A");
 			dev->BaseDistance("N/A");
 			dev->Range("N/A");
+			dev->ConnectionStatus(false);
 			continue;
 		}
 		dev->SerialNumber(QString::number(dev->DevWorker()->Serial()));
 		dev->BaseDistance(QString::number(dev->DevWorker()->MaxDistance()));
 		dev->Range(QString::number(dev->DevWorker()->Range()));
-		dev->DevWorker()->ReceiveNewValues();
+		//dev->DevWorker()->ReceiveNewValues();
+		dev->ConnectionStatus(true);
 	}
-
-
-	/*DeviceDataWidget* dev;
-	foreach(dev, _devWidgets)
-	{
-		bool chk = dev->DevWorker()->ConnectToDevice(sl[0], sl[1].toULong(), dev->NetworkAddress().toUShort());		
-	}*/
 }

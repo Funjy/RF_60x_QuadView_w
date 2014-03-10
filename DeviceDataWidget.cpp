@@ -35,3 +35,8 @@ void DeviceDataWidget::onNewPlotValue(float value)
 {
 	_plot->AddPlotData(_plotTitle, value);
 }
+
+void DeviceDataWidget::ClearPlot()
+{
+	_plot->RemovePlotData(_plotTitle);
+}
