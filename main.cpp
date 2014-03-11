@@ -14,13 +14,13 @@ void setCenterOfApplication(QWidget* widget);
 int main(int argc, char *argv[])
 {	
 	QString path = QDir::current().absolutePath();
-	//QStringList paths = QCoreApplication::libraryPaths();		
+	QStringList paths = QCoreApplication::libraryPaths();		
 	//paths[0] = path + "/plugins";
 	//paths.removeAt(0);
-	//paths.append(".");
-	/*paths.append(path + "/plugins");
-	paths.append(path + "/qml");
-	QCoreApplication::setLibraryPaths(paths);*/
+	paths.append(".");
+	paths.append(path + "/plugins");
+	paths.append(path + "/platforms");
+	QCoreApplication::setLibraryPaths(paths);
     QApplication a(argc, argv);		
 	//list.append(".");		
 	/*QStringList list = a.libraryPaths();
