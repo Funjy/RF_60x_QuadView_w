@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>main.qml</file>
+        <file>properties.js</file>
+    </qresource>
+</RCC>

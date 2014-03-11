@@ -55,7 +55,7 @@ public:
     {
         if (DeviceDataWidget->objectName().isEmpty())
             DeviceDataWidget->setObjectName(QStringLiteral("DeviceDataWidget"));
-        DeviceDataWidget->resize(673, 312);
+        DeviceDataWidget->resize(582, 303);
         horizontalLayout_2 = new QHBoxLayout(DeviceDataWidget);
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -83,6 +83,12 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(label_2->sizePolicy().hasHeightForWidth());
         label_2->setSizePolicy(sizePolicy);
+        QFont font;
+        font.setPointSize(10);
+        font.setBold(false);
+        font.setWeight(50);
+        font.setStyleStrategy(QFont::PreferAntialias);
+        label_2->setFont(font);
 
         horizontalLayout_3->addWidget(label_2);
 
@@ -94,11 +100,11 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(addressBox->sizePolicy().hasHeightForWidth());
         addressBox->setSizePolicy(sizePolicy1);
-        addressBox->setMaximumSize(QSize(50, 16777215));
+        addressBox->setMaximumSize(QSize(27, 16777215));
 
         horizontalLayout_3->addWidget(addressBox);
 
-        horizontalSpacer_7 = new QSpacerItem(12, 1, QSizePolicy::Fixed, QSizePolicy::Minimum);
+        horizontalSpacer_7 = new QSpacerItem(10, 1, QSizePolicy::Fixed, QSizePolicy::Minimum);
 
         horizontalLayout_3->addItem(horizontalSpacer_7);
 
@@ -106,6 +112,9 @@ public:
         statusLabel->setObjectName(QStringLiteral("statusLabel"));
         sizePolicy.setHeightForWidth(statusLabel->sizePolicy().hasHeightForWidth());
         statusLabel->setSizePolicy(sizePolicy);
+        QFont font1;
+        font1.setPointSize(10);
+        statusLabel->setFont(font1);
 
         horizontalLayout_3->addWidget(statusLabel);
 
@@ -113,6 +122,7 @@ public:
         statusBox->setObjectName(QStringLiteral("statusBox"));
         sizePolicy.setHeightForWidth(statusBox->sizePolicy().hasHeightForWidth());
         statusBox->setSizePolicy(sizePolicy);
+        statusBox->setFont(font1);
         statusBox->setScaledContents(false);
 
         horizontalLayout_3->addWidget(statusBox);
@@ -136,6 +146,7 @@ public:
         snLabel->setObjectName(QStringLiteral("snLabel"));
         sizePolicy.setHeightForWidth(snLabel->sizePolicy().hasHeightForWidth());
         snLabel->setSizePolicy(sizePolicy);
+        snLabel->setFont(font1);
 
         horizontalLayout->addWidget(snLabel);
 
@@ -143,10 +154,11 @@ public:
         snBox->setObjectName(QStringLiteral("snBox"));
         sizePolicy.setHeightForWidth(snBox->sizePolicy().hasHeightForWidth());
         snBox->setSizePolicy(sizePolicy);
+        snBox->setFont(font1);
 
         horizontalLayout->addWidget(snBox);
 
-        horizontalSpacer_5 = new QSpacerItem(12, 1, QSizePolicy::Maximum, QSizePolicy::Minimum);
+        horizontalSpacer_5 = new QSpacerItem(10, 1, QSizePolicy::Maximum, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer_5);
 
@@ -154,6 +166,7 @@ public:
         baseDistLabel->setObjectName(QStringLiteral("baseDistLabel"));
         sizePolicy.setHeightForWidth(baseDistLabel->sizePolicy().hasHeightForWidth());
         baseDistLabel->setSizePolicy(sizePolicy);
+        baseDistLabel->setFont(font1);
 
         horizontalLayout->addWidget(baseDistLabel);
 
@@ -161,10 +174,11 @@ public:
         baseDistBox->setObjectName(QStringLiteral("baseDistBox"));
         sizePolicy.setHeightForWidth(baseDistBox->sizePolicy().hasHeightForWidth());
         baseDistBox->setSizePolicy(sizePolicy);
+        baseDistBox->setFont(font1);
 
         horizontalLayout->addWidget(baseDistBox);
 
-        horizontalSpacer_6 = new QSpacerItem(12, 1, QSizePolicy::Maximum, QSizePolicy::Minimum);
+        horizontalSpacer_6 = new QSpacerItem(10, 1, QSizePolicy::Maximum, QSizePolicy::Minimum);
 
         horizontalLayout->addItem(horizontalSpacer_6);
 
@@ -172,6 +186,7 @@ public:
         rangeLabel->setObjectName(QStringLiteral("rangeLabel"));
         sizePolicy.setHeightForWidth(rangeLabel->sizePolicy().hasHeightForWidth());
         rangeLabel->setSizePolicy(sizePolicy);
+        rangeLabel->setFont(font1);
 
         horizontalLayout->addWidget(rangeLabel);
 
@@ -179,6 +194,7 @@ public:
         rangeBox->setObjectName(QStringLiteral("rangeBox"));
         sizePolicy.setHeightForWidth(rangeBox->sizePolicy().hasHeightForWidth());
         rangeBox->setSizePolicy(sizePolicy);
+        rangeBox->setFont(font1);
 
         horizontalLayout->addWidget(rangeBox);
 
@@ -208,9 +224,10 @@ public:
     {
         DeviceDataWidget->setWindowTitle(QApplication::translate("DeviceDataWidget", "DeviceDataWidget", 0));
         label_2->setText(QApplication::translate("DeviceDataWidget", "Network address: ", 0));
+        addressBox->setText(QString());
         statusLabel->setText(QApplication::translate("DeviceDataWidget", "Status:", 0));
         statusBox->setText(QApplication::translate("DeviceDataWidget", "Not connected", 0));
-        snLabel->setPlainText(QApplication::translate("DeviceDataWidget", "Serial: ", 0));
+        snLabel->setPlainText(QApplication::translate("DeviceDataWidget", "S.N.: ", 0));
         snBox->setText(QApplication::translate("DeviceDataWidget", "N/A", 0));
         baseDistLabel->setPlainText(QApplication::translate("DeviceDataWidget", "Base distance: ", 0));
         baseDistBox->setText(QApplication::translate("DeviceDataWidget", "N/A", 0));

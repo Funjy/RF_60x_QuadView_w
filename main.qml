@@ -65,11 +65,13 @@ Rectangle {
             streamButton.enabled = true
             streamButton.text = qsTr("Stop stream")
             isStreamParametersEnabled = false
+            identificationButton.enabled = false
         }
         else
         {
             streamButton.text = qsTr("Start Stream")
             isStreamParametersEnabled = true
+            identificationButton.enabled = true
         }
     }
 
@@ -88,9 +90,13 @@ Rectangle {
 
     function setConnectParameters(params)
     {
+        var tmpModel = [params[0]]
+        comPortsModel = tmpModel
         var bri = baudRateBox.find(params[1])
         if(bri !== -1)
-            baudRateBox.currentIndex(bri)
+        {
+            baudRateBox.currentIndex = bri
+        }
         periodBox.text = params[2]
         dumpFileBox.text = params[3]
     }
@@ -129,6 +135,7 @@ Rectangle {
             Text{
                 text: qsTr("Com port") + ":"
                 font.pointSize: fontSize
+                renderType: Text.NativeRendering
             }
 
             ComboBox{
@@ -144,6 +151,7 @@ Rectangle {
             Text {
                 text: qsTr("Baud rate") + ":"
                 font.pointSize: fontSize
+                renderType: Text.NativeRendering
             }
 
             ComboBox{
@@ -151,14 +159,12 @@ Rectangle {
                 Layout.fillWidth: true
                 model: baudRatesModel
                 enabled: root.isComParametersEnabled
-                Component.onCompleted: {
-                    imLoaded()
-                }
             }
 
             Text {
                 text: qsTr("Period") + ", ms:"
                 font.pointSize: fontSize
+                renderType: Text.NativeRendering
             }
 
             TextField{
@@ -170,6 +176,7 @@ Rectangle {
             Text {
                 text: qsTr("Dump file") + ":"
                 font.pointSize: fontSize
+                renderType: Text.NativeRendering
             }
 
             TextField{

@@ -49,12 +49,13 @@ public:
 
 	bool ReceiveInfo(BYTE address);
 	bool ReceiveInfo();
-	void ReceiveNewValues(BYTE address);
-	void ReceiveNewValues();
+	float ReceiveNewValues(BYTE address);
+	float ReceiveNewValues();
 
 	bool LockResult(BYTE address);
 
-	Q_INVOKABLE void findActiveComPorts();
+	void findActiveComPorts();
+	//Q_INVOKABLE void findActiveComPorts();
 
 	static QList<QString> OpenedPorts;
 	static QMutex CheckOpenedPortsMutex;

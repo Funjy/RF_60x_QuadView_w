@@ -48,23 +48,24 @@ void DeviceWorker::findActiveComPorts()
 	emit ComPortsScanned();
 }
 
-void DeviceWorker::ReceiveNewValues()
+float DeviceWorker::ReceiveNewValues()
 {
-	ReceiveNewValues(_devAddress);
+	return ReceiveNewValues(_devAddress);
 }
 
-void DeviceWorker::ReceiveNewValues(BYTE address)
+float DeviceWorker::ReceiveNewValues(BYTE address)
 {
 	if(!_sensor)
-		return;
+		return -1;
 	if(!_isConnected)
-		return;
+		return 0;
 	_sensor->BindNetworkAddress(address);
 	//float val = _sensor->GetSingleMeasure();
 	USHORT measure = 0;
 	_sensor->Measure(address, &measure);		
 	float retVal = RecalcValue(measure, Range());
 	emit NewValueReceived(retVal);
+	return retVal;
 }
 
 //bool DeviceWorker::ConnectToDevice(QString port, DWORD speed, BYTE address)

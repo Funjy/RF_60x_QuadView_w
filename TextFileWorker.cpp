@@ -89,7 +89,7 @@ bool TextFileWorker::ReadCSVLine(QStringList* line)
 
 bool TextFileWorker::WriteCSVLine(QStringList text)
 {
-	if(_ts == NULL)
+	if(_ts == NULL || !_isOpened)
 		return false;
 	QString sb;
 	QString str;

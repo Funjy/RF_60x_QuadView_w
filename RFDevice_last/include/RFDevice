@@ -1,0 +1,27 @@
+#ifndef RFDEVICE_ALL_INCLUDE
+#define RFDEVICE_ALL_INCLUDE
+
+#include "RFDevice.h"
+#include "RFDeviceDefs.h"
+#include "RFLanDetector.h"
+#include "RFComDetector.h"
+#include "RFLanDevice.h"
+#include "RFComDevice.h"
+#include "RF060Device.h"
+#include "RF085Device.h"
+#include "RF25xDevice.h"
+#include "RF60xDevice.h"
+#include "RF65xDevice.h"
+#include "RF65xNDevice.h"
+#include "RF603BDevice.h"
+#include "RF603Device.h"
+#include "RF603HSDevice.h"
+#include "RF605Device.h"
+#include "RF620Device.h"
+#include "RF625Device.h"
+#include "RF651Device.h"
+#include "RF656Device.h"
+#include "RF700Device.h"
+#include "RFQDPMotorDevice.h"
+
+#endif //RFDEVICE_ALL_INCLUDE

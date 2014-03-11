@@ -220,6 +220,6 @@ QwtSymbol* PlotWidget::GetDefaultMarker()
 	QwtSymbol *symbol1 = new QwtSymbol();
 	symbol1->setStyle(QwtSymbol::Ellipse);
 	symbol1->setPen(QColor(Qt::black));	
-	symbol1->setSize(2);
+	symbol1->setSize(3);
 	return symbol1;
 }
